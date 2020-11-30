@@ -1,7 +1,9 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bowling_game", "bowling_game\bowling_game.csproj", "{79F234E1-9CCF-4705-9B39-313417A7BCA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bowling", "Bowling\Bowling.csproj", "{E42C9E52-4FC8-453D-835C-5BB0E65F84D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_bowling", "Test_bowling\Test_bowling.csproj", "{187C5D0F-8089-4314-9A16-F9995BCB2FFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,9 +11,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{79F234E1-9CCF-4705-9B39-313417A7BCA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{79F234E1-9CCF-4705-9B39-313417A7BCA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{79F234E1-9CCF-4705-9B39-313417A7BCA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{79F234E1-9CCF-4705-9B39-313417A7BCA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E42C9E52-4FC8-453D-835C-5BB0E65F84D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E42C9E52-4FC8-453D-835C-5BB0E65F84D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E42C9E52-4FC8-453D-835C-5BB0E65F84D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E42C9E52-4FC8-453D-835C-5BB0E65F84D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{187C5D0F-8089-4314-9A16-F9995BCB2FFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{187C5D0F-8089-4314-9A16-F9995BCB2FFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{187C5D0F-8089-4314-9A16-F9995BCB2FFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{187C5D0F-8089-4314-9A16-F9995BCB2FFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

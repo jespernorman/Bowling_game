@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bowling", "Bowling\Bowling.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_bowling", "Test_bowling\Test_bowling.csproj", "{187C5D0F-8089-4314-9A16-F9995BCB2FFA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bowling_applikation", "Bowling_applikation\Bowling_applikation.csproj", "{E5E2EB54-29D4-4C2D-BC64-7C5EF6F2D6D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,5 +21,9 @@ Global
 		{187C5D0F-8089-4314-9A16-F9995BCB2FFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{187C5D0F-8089-4314-9A16-F9995BCB2FFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{187C5D0F-8089-4314-9A16-F9995BCB2FFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5E2EB54-29D4-4C2D-BC64-7C5EF6F2D6D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5E2EB54-29D4-4C2D-BC64-7C5EF6F2D6D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5E2EB54-29D4-4C2D-BC64-7C5EF6F2D6D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5E2EB54-29D4-4C2D-BC64-7C5EF6F2D6D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

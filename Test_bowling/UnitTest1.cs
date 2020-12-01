@@ -10,7 +10,7 @@ namespace Test_bowling
         {
             var round = new Round();
 
-            var actual = round.Roll(pins: 3, Pins: 2);
+            var actual = round.Roll(pins1: 3, pins2: 2, roundId: 1);
 
             Assert.AreEqual(5, actual);
         }

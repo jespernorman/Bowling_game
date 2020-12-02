@@ -7,49 +7,52 @@ namespace Bowling
     public class Player
     {
         public string PlayerName { get; set; }
-        public List<Round> rounds = new List<Round>();
+        public string PlayerId { get; set; }
+        public List<Round> roundInfo = new List<Round>();
 
-        public Player()
+        public Player(string playerName, int playerId)
         {
+            PlayerName = playerName;
+            PlayerId = PlayerId;
 
         }
-        public void PlayRound(string playerName, int roundId, int pins1, int pins2, bool strike, bool spare)
+
+        public void PlayRound(int roundId, int pins1, int pins2, bool strike, bool spare, int bonusPoint, string playerName, int playerId)
         {
-            var round = new Round();
-            PlayerName = playerName;
+            var round = new Round(roundId);
 
             if (spare == true)
             {
-                round.AddSpare(pins1, pins2, spare, roundId);
+                round.AddSpare(pins1, pins2, spare);
             }
             else if (strike == true)
             {
-                round.AddStrike(strike, roundId);
+                round.AddStrike(strike, pins1);
             }
             else
             {
-                round.Roll(pins1, pins2, roundId);
+                round.Roll(pins1, pins2);
             }
 
             if (CheckForBonus(roundId))
             {
-                var countBonus = 0;
-                var previousRound = rounds.FirstOrDefault(round => round.RoundId == roundId - 1 && round.Spare == true || round.Strike == true);
+                bonusPoint = 0;
+                var previousRound = roundInfo.FirstOrDefault(round => round.RoundId == roundId - 1 && round.Spare == true || round.Strike == true);
                 if (previousRound.Strike)
                 {
-                    countBonus = 10;
+                    bonusPoint = 10;
                 }
                 else
                 {
-                    countBonus = pins1 + pins2;
+                    bonusPoint = pins1 + pins2;
                 }
-                previousRound.AddBonus(countBonus);
+                previousRound.AddBonus(bonusPoint, playerName, playerId);
             }
-            rounds.Add(round);
+            roundInfo.Add(round);
         }
         public bool CheckForBonus(int currentRoundId)
         {
-            return rounds.Any(round => round.RoundId == currentRoundId - 1 && round.Spare == true || round.Strike == true);
+            return roundInfo.Any(round => round.RoundId == currentRoundId - 1 && round.Spare == true || round.Strike == true);
         }
     }
 }

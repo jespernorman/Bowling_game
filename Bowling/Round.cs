@@ -16,14 +16,26 @@ namespace Bowling
             RoundId = roundId;
         }
 
-        public Round()
+        public int Roll(int pins1, int pins2)
         {
-        }
+            var maxPinsValue = 10;
 
-        public int Roll(int pins1, int pins2, int roundId)
-        {
-            RoundId = roundId;
-            ScoreStore += pins1 + pins2;
+            if (maxPinsValue == pins1)
+            {
+                Strike = true;
+                int strikePoint = 10;
+                ScoreStore += strikePoint;
+            }
+            if (maxPinsValue == pins1 + pins2)
+            {
+                Spare = true;
+                ScoreStore += pins1 + pins2;
+            }
+            else
+            {
+                ScoreStore += pins1 + pins2;
+            }
+
             return ScoreStore;
         }
 
@@ -32,30 +44,30 @@ namespace Bowling
             return ScoreStore;
         }
 
-        public void AddSpare(int pins1, int pins2, bool spare, int roundId)
-        {
-            RoundId = roundId;
-            if(spare == true)
-            {                                                    //nästa kasst bonus
-                Spare = spare;
-                ScoreStore += pins1 + pins2;
-            }
-        }
+        //public void AddSpare(int pins1, int pins2, bool spare)
+        //{
+        //    int sumofpins = 10;
+        //    if(sumofpins == pins1 + pins2)
+        //    {                             
+        //        Spare = true;
+        //        ScoreStore += pins1 + pins2;
+        //    }
+        //}
 
-        public void AddStrike(bool strike, int roundId)
-        {
-            RoundId = roundId;
-            if (strike == true)
-            {
-                Strike = strike;
-                int strikePoint = 10;       //2 extra kasst som blir bonusen
-                ScoreStore += strikePoint;
-            }
-        }
+        //public void AddStrike(bool strike, int pins1)
+        //{
+        //    int allpins = 10;
+        //    if (allpins == pins1)
+        //    {
+        //        Strike = true;
+        //        int strikePoint = 10;      
+        //        ScoreStore += strikePoint;
+        //    }
+        //}
 
-        public void AddBonus(int bonusPoint)
+        public void AddBonus(int bonusPoint, string playerName, int playerId)
         {
-            var player = new Player();
+            var player = new Player(playerName, playerId);
             bonusPoint = 0;
             ScoreStore += bonusPoint;
         }

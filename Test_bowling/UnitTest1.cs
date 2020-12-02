@@ -7,34 +7,50 @@ namespace Test_bowling
         [Test]
         public void RollTest()
         {
-            var round = new Bowling.Round(roundId:1);
+            var round = new Bowling.Round(roundId: 1);
 
             var actual = round.Roll(pins1: 3, pins2: 2);
 
             Assert.AreEqual(5, actual);
         }
+
         [Test]
         public void SpareTest()
         {
             var round = new Bowling.Round(roundId: 1);
 
             var actual = round.Roll(pins1: 8, pins2: 2);
-            if(AddSpare(pins1: 5, pins2: 5, true)
-            {
 
-            }
-
-            Assert.IsFalse(true);
-
+            Assert.IsTrue(round.Spare);
         }
+
         [Test]
         public void StrikeTest()
         {
             var round = new Bowling.Round(roundId: 1);
 
-            var actual = round.AddStrike(false);
+            var actual = round.Roll(pins1: 10, pins2: 0);
 
-            Assert.IsFalse(false);
+            Assert.IsTrue(round.Strike);
+        }
+
+        [Test]
+        public void AddBonus()
+        {
+            var round = new Bowling.Round(roundId: 1);
+
+            var originalScore = round.ScoreStore;
+            var bonus = round.BonusPoint;
+
+            round.AddBonus(10);
+            if(round.ScoreStore < originalScore && bonus < originalScore)
+            {
+                Assert.Pass();
+            }
+            else
+            {
+                Assert.Fail();
+            }
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Bowling
 {
     public class Round
     {
-        private int ScoreStore { get; set; }
+        public int ScoreStore { get; set; }
         public bool Spare { get; set; }
         public bool Strike { get; set; }
         public int RoundId { get; set; }
@@ -20,13 +20,13 @@ namespace Bowling
         {
             var maxPinsValue = 10;
 
-            if (maxPinsValue == pins1)
+            if (pins1 == maxPinsValue)
             {
                 Strike = true;
-                int strikePoint = 10;
-                ScoreStore += strikePoint;
+                maxPinsValue = 10;
+                ScoreStore += maxPinsValue;
             }
-            if (maxPinsValue == pins1 + pins2)
+            if (pins1 + pins2 == maxPinsValue)
             {
                 Spare = true;
                 ScoreStore += pins1 + pins2;
@@ -44,31 +44,9 @@ namespace Bowling
             return ScoreStore;
         }
 
-        //public void AddSpare(int pins1, int pins2, bool spare)
-        //{
-        //    int sumofpins = 10;
-        //    if(sumofpins == pins1 + pins2)
-        //    {                             
-        //        Spare = true;
-        //        ScoreStore += pins1 + pins2;
-        //    }
-        //}
-
-        //public void AddStrike(bool strike, int pins1)
-        //{
-        //    int allpins = 10;
-        //    if (allpins == pins1)
-        //    {
-        //        Strike = true;
-        //        int strikePoint = 10;      
-        //        ScoreStore += strikePoint;
-        //    }
-        //}
-
-        public void AddBonus(int bonusPoint, string playerName, int playerId)
+        public void AddBonus(int bonusPoint)
         {
-            var player = new Player(playerName, playerId);
-            bonusPoint = 0;
+            BonusPoint = bonusPoint;
             ScoreStore += bonusPoint;
         }
     }

@@ -17,26 +17,15 @@ namespace Bowling
 
         }
 
-        public void PlayRound(int roundId, int pins1, int pins2, bool strike, bool spare, int bonusPoint, string playerName, int playerId)
+        public void PlayRound(int roundId, int pins1, int pins2, string playerName, int playerId)
         {
             var round = new Round(roundId);
 
-            if (spare == true)
-            {
-                round.AddSpare(pins1, pins2, spare);
-            }
-            else if (strike == true)
-            {
-                round.AddStrike(strike, pins1);
-            }
-            else
-            {
-                round.Roll(pins1, pins2);
-            }
-
+            round.Roll(pins1, pins2);
+           
             if (CheckForBonus(roundId))
             {
-                bonusPoint = 0;
+                var bonusPoint = 0;
                 var previousRound = roundInfo.FirstOrDefault(round => round.RoundId == roundId - 1 && round.Spare == true || round.Strike == true);
                 if (previousRound.Strike)
                 {
@@ -46,7 +35,7 @@ namespace Bowling
                 {
                     bonusPoint = pins1 + pins2;
                 }
-                previousRound.AddBonus(bonusPoint, playerName, playerId);
+                previousRound.AddBonus(bonusPoint);
             }
             roundInfo.Add(round);
         }

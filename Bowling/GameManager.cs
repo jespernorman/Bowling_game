@@ -26,7 +26,7 @@ namespace Bowling
             }
             return playerName;
         }
-        public void PlayGameRound(int roundId, int pins1, int pins2, bool strike, bool spare, int bonusPoint, string playerName, int playerId)
+        public void PlayGameRound(int roundId, int pins1, int pins2, string playerName, int playerId)
         { 
             var player = new Player(playerName, playerId);
 
@@ -34,7 +34,7 @@ namespace Bowling
             {
                 if (ListOfPlayers.Contains(player))
                 {
-                    player.PlayRound(roundId, pins1, pins2, strike, spare, bonusPoint, playerName, playerId);
+                    player.PlayRound(roundId, pins1, pins2, playerName, playerId);
                 }
             }
         }

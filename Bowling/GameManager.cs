@@ -44,7 +44,7 @@ namespace Bowling
 
             if (chosenPlayer != null)
             {
-                chosenPlayer.PlayRound(roundId, pins1, pins2);
+                chosenPlayer.PlayRound(currentRound, pins1, pins2);
             }
 
             var nextPlayer = ListOfPlayers.FirstOrDefault(player => player.PlayerId == playerInfo.CurrentPlayerId + 1);

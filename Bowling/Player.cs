@@ -7,17 +7,16 @@ namespace Bowling
     public class Player
     {
         public string PlayerName { get; set; }
-        public string PlayerId { get; set; }
+        public int PlayerId { get; set; }
         public List<Round> roundInfo = new List<Round>();
 
         public Player(string playerName, int playerId)
         {
             PlayerName = playerName;
-            PlayerId = PlayerId;
-
+            PlayerId = playerId;
         }
 
-        public void PlayRound(int roundId, int pins1, int pins2, string playerName, int playerId)
+        public void PlayRound (int roundId, int pins1, int pins2)
         {
             var round = new Round(roundId);
 
@@ -39,7 +38,8 @@ namespace Bowling
             }
             roundInfo.Add(round);
         }
-        public bool CheckForBonus(int currentRoundId)
+
+        private bool CheckForBonus (int currentRoundId)
         {
             return roundInfo.Any(round => round.RoundId == currentRoundId - 1 && round.Spare == true || round.Strike == true);
         }

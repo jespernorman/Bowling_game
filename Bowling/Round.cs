@@ -16,7 +16,7 @@ namespace Bowling
             RoundId = roundId;
         }
 
-        public int Roll(int pins1, int pins2)
+        public int Roll (int pins1, int pins2)
         {
             var maxPinsValue = 10;
 
@@ -39,12 +39,12 @@ namespace Bowling
             return ScoreStore;
         }
 
-        public int GetScore()
+        public int GetScore ()
         {
             return ScoreStore;
         }
 
-        public void AddBonus(int bonusPoint)
+        public void AddBonus (int bonusPoint)
         {
             BonusPoint = bonusPoint;
             ScoreStore += bonusPoint;

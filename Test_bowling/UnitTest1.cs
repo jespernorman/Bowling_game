@@ -5,7 +5,7 @@ namespace Test_bowling
     public class Tests
     {
         [Test]
-        public void Round_RollTest()
+        public void Round_AddRollTest()
         {
             var round = new Bowling.Round(roundId: 1);
 

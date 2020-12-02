@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+
 namespace Bowling
 {
     public class GameManager
@@ -8,35 +10,51 @@ namespace Bowling
         {
 
         }
-        public int AmountOfPlayers { get; set; }
-        public string PlayerName { get; set; }
         public int RoundScore { get; set; }
         public const int MaxRounds = 10;
         public int RoundId { get; set; }
         public List<Player> PlayerScorePerRound = new List<Player>();
         public List<Player> ListOfPlayers = new List<Player>();
 
-        public string StartGame(string playerName, int playerId)
+        public PlayerInfo StartGame (string []arrayOfPlayers)
         {
-            var player = new Player(playerName, playerId);
-            AmountOfPlayers = 0;
-            for (int i = 0; i >= AmountOfPlayers; i++)
-            {
+            var firstPlayer = "";
+
+            for (int i = 0; i < arrayOfPlayers.Length; i++)
+            {             
+                if(i==0)
+                {
+                    firstPlayer = arrayOfPlayers[i];
+                }
+
+                var player = new Player(arrayOfPlayers[i], i+1);
                 ListOfPlayers.Add(player);
             }
-            return playerName;
-        }
-        public void PlayGameRound(int roundId, int pins1, int pins2, string playerName, int playerId)
-        { 
-            var player = new Player(playerName, playerId);
+            var playerInfo = new PlayerInfo();
+            playerInfo.CurrentPlayer = firstPlayer;
+            playerInfo.CurrentPlayerId = 1;
+            playerInfo.CurrentRound = 1;
 
-            for (int i = 0; i >= MaxRounds; i++)
-            {
-                if (ListOfPlayers.Contains(player))
-                {
-                    player.PlayRound(roundId, pins1, pins2, playerName, playerId);
-                }
-            }
+            return playerInfo;
         }
+
+        public PlayerInfo PlayGameRound(int pins1, int pins2, PlayerInfo currentPlayerInfo)
+        {
+            var chosenPlayer = ListOfPlayers.FirstOrDefault(player => player.PlayerName == currentPlayerInfo.CurrentPlayer && player.PlayerId == currentPlayerInfo.CurrentPlayerId);
+
+            if (chosenPlayer != null)
+            {
+                chosenPlayer.PlayRound(RoundId, pins1, pins2);
+            }
+
+            var nextPlayer = ListOfPlayers.FirstOrDefault(player => player.PlayerName == currentPlayerInfo.CurrentPlayer && player.PlayerId == currentPlayerInfo.CurrentPlayerId);
+
+            if (nextPlayer != null)
+            {
+                nextPlayer.PlayRound(RoundId, pins1, pins2);
+            }
+            return nextPlayer;
+        }
+
     }
 }

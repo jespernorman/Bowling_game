@@ -5,7 +5,7 @@ namespace Test_bowling
     public class Tests
     {
         [Test]
-        public void RollTest()
+        public void Round_RollTest()
         {
             var round = new Bowling.Round(roundId: 1);
 
@@ -15,35 +15,36 @@ namespace Test_bowling
         }
 
         [Test]
-        public void SpareTest()
+        public void Round_AddSpare()
         {
             var round = new Bowling.Round(roundId: 1);
 
-            var actual = round.Roll(pins1: 8, pins2: 2);
+            round.Roll(pins1: 8, pins2: 2);
 
             Assert.IsTrue(round.Spare);
         }
 
         [Test]
-        public void StrikeTest()
+        public void Round_AddStrike()
         {
             var round = new Bowling.Round(roundId: 1);
 
-            var actual = round.Roll(pins1: 10, pins2: 0);
+            round.Roll(pins1: 10, pins2: 0);
 
             Assert.IsTrue(round.Strike);
         }
 
         [Test]
-        public void AddBonus()
+        public void Round_AddBonus()
         {
             var round = new Bowling.Round(roundId: 1);
 
             var originalScore = round.ScoreStore;
-            var bonus = round.BonusPoint;
+            var originalBonus = round.BonusPoint;
 
             round.AddBonus(10);
-            if(round.ScoreStore < originalScore && bonus < originalScore)
+
+            if(round.ScoreStore > originalScore && round.BonusPoint > originalBonus)
             {
                 Assert.Pass();
             }
@@ -52,5 +53,24 @@ namespace Test_bowling
                 Assert.Fail();
             }
         }
+
+        [Test]
+        public void Round_GetScore()
+        {
+            var round = new Bowling.Round(roundId: 1);
+            var pins1 = 5;
+            var pins2 = 1;
+
+            var actual = round.Roll(pins1, pins2);
+
+            if (actual == round.GetScore())
+            {
+                Assert.Pass();
+            }
+            else
+            {
+                Assert.Fail();
+            }
+        }        
     }
 }

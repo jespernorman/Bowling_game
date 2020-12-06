@@ -5,7 +5,7 @@ namespace Bowling
     {
         public string CurrentPlayer { get; set; }
         public int CurrentPlayerId { get; set; }
-        public int CurrentRound { get; set; }
+        public int CurrentFrame { get; set; }
         public bool GameFinished { get; set; }
     }
 }

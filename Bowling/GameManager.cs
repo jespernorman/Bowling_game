@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Bowling
@@ -10,7 +9,8 @@ namespace Bowling
         {
 
         }
-        public const int MaxRounds = 10;
+        public const int MaxFrames = 10;
+        private const int MaxPinsValue = 10;
 
         public List<Player> ListOfPlayers = new List<Player>();
 
@@ -31,35 +31,54 @@ namespace Bowling
             var playerInfo = new PlayerInfo();
             playerInfo.CurrentPlayer = firstPlayer;
             playerInfo.CurrentPlayerId = 1;
-            playerInfo.CurrentRound = 1;
+            playerInfo.CurrentFrame = 1;
 
             return playerInfo;
         }
 
-        public PlayerInfo PlayGameRound(int pins1, int pins2, PlayerInfo playerInfo)
+        public PlayerInfo PlayGameFrame(int pins1, int pins2, PlayerInfo playerInfo)
         {
-            var currentRound = playerInfo.CurrentRound;
+            var currentFrame = playerInfo.CurrentFrame;
 
-            var chosenPlayer = ListOfPlayers.FirstOrDefault(player => player.PlayerName == playerInfo.CurrentPlayer && player.PlayerId == playerInfo.CurrentPlayerId);
+            var choosenPlayer = ListOfPlayers.FirstOrDefault(player => player.PlayerName == playerInfo.CurrentPlayer && player.PlayerId == playerInfo.CurrentPlayerId);
 
-            if (chosenPlayer != null)
+            if (choosenPlayer != null)
             {
-                chosenPlayer.PlayRound(currentRound, pins1, pins2);
+                var frame = new Frame();
+                frame.FrameId = currentFrame;
+                frame.Pins1 = pins1;
+                frame.Pins2 = pins2;
+                if (pins1 == MaxPinsValue)
+                {
+                    frame.Strike = true;
+                }
+                if (pins1 + pins2 == MaxPinsValue)
+                {
+                    frame.Spare = true;
+                }
+
+                choosenPlayer.ListOfFrames.Add(frame);
             }
 
             var nextPlayer = ListOfPlayers.FirstOrDefault(player => player.PlayerId == playerInfo.CurrentPlayerId + 1);
             var nextPlayerInfo = new PlayerInfo();
 
-            if (nextPlayer == null && currentRound < MaxRounds)
+            if (nextPlayer == null && currentFrame < MaxFrames)
             {
                 nextPlayer = ListOfPlayers.FirstOrDefault(player => player.PlayerId == 1);
-                currentRound++;
+                currentFrame++;
                 nextPlayerInfo.CurrentPlayer = nextPlayer.PlayerName;
                 nextPlayerInfo.CurrentPlayerId = nextPlayer.PlayerId;
-                nextPlayerInfo.CurrentRound = currentRound;
+                nextPlayerInfo.CurrentFrame = currentFrame;
             }
             else
             {
+                //Round is finished now we need to store the data
+                foreach (var player in ListOfPlayers)
+                {
+                    player.StoreRound();
+                }
+
                 playerInfo.GameFinished = true;
             }
 

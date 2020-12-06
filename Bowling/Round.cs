@@ -1,42 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Bowling
 {
     public class Round
     {
         public int ScoreStore { get; set; }
-        public bool Spare { get; set; }
-        public bool Strike { get; set; }
-        public int RoundId { get; set; }
-        public int BonusPoint { get; set; }
+        private const int MaxPinsValue = 10;
 
-        public Round(int roundId)
-        {
-            RoundId = roundId;
+        public Round()
+        { 
+
         }
 
-        public int Roll (int pins1, int pins2)
+        public int SaveFrame(int pins1, int pins2)
         {
-            var maxPinsValue = 10;
-
-            if (pins1 == maxPinsValue)
-            {
-                Strike = true;
-                maxPinsValue = 10;
-                ScoreStore += maxPinsValue;
-            }
-            if (pins1 + pins2 == maxPinsValue)
-            {
-                Spare = true;
-                ScoreStore += pins1 + pins2;
-            }
-            else
-            {
-                ScoreStore += pins1 + pins2;
-            }
-
+            ScoreStore += pins1 + pins2;
             return ScoreStore;
+        }
+
+        public void SaveRound(List<Frame> listOfFrames)
+        {
+            foreach (var currentFrame in listOfFrames)
+            {
+                if (currentFrame.FrameId == 1)
+                {
+                    SaveFrame(currentFrame.Pins1, currentFrame.Pins2);
+                }
+                else
+                {
+                    if (CheckForBonus(currentFrame.FrameId, listOfFrames))
+                    {
+                        var bonusPoint = 0;
+                        var previousFrame = listOfFrames.FirstOrDefault(x => x.FrameId == currentFrame.FrameId - 1);
+                        if (previousFrame.Strike)
+                        {
+                            bonusPoint = MaxPinsValue;
+                        }
+                        else if (previousFrame.Spare)
+                        {
+                            bonusPoint = currentFrame.Pins1 + currentFrame.Pins2;
+                        }
+                        ScoreStore += bonusPoint;
+                    }
+                    else
+                    {
+                        SaveFrame(currentFrame.Pins1, currentFrame.Pins2); ;
+                    }
+                }
+            }
         }
 
         public int GetScore ()
@@ -44,10 +56,9 @@ namespace Bowling
             return ScoreStore;
         }
 
-        public void AddBonus (int bonusPoint)
+        private bool CheckForBonus(int currentFrameId, List<Frame> listofFrames)
         {
-            BonusPoint = bonusPoint;
-            ScoreStore += bonusPoint;
+            return listofFrames.Any(frame => frame.FrameId == currentFrameId - 1 && frame.Spare == true || frame.Strike == true);
         }
     }
 }

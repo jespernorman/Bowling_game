@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace Bowling
 {
@@ -8,7 +6,7 @@ namespace Bowling
     {
         public string PlayerName { get; set; }
         public int PlayerId { get; set; }
-        public List<Round> roundInfo = new List<Round>();
+        public List<Frame> ListOfFrames = new List<Frame>();
 
         public Player(string playerName, int playerId)
         {
@@ -16,32 +14,10 @@ namespace Bowling
             PlayerId = playerId;
         }
 
-        public void PlayRound (int roundId, int pins1, int pins2)
+        public void StoreRound()
         {
-            var round = new Round(roundId);
-
-            round.Roll(pins1, pins2);
-           
-            if (CheckForBonus(roundId))
-            {
-                var bonusPoint = 0;
-                var previousRound = roundInfo.FirstOrDefault(round => round.RoundId == roundId - 1 && round.Spare == true || round.Strike == true);
-                if (previousRound.Strike)
-                {
-                    bonusPoint = 10;
-                }
-                else
-                {
-                    bonusPoint = pins1 + pins2;
-                }
-                previousRound.AddBonus(bonusPoint);
-            }
-            roundInfo.Add(round);
-        }
-
-        private bool CheckForBonus (int currentRoundId)
-        {
-            return roundInfo.Any(round => round.RoundId == currentRoundId - 1 && round.Spare == true || round.Strike == true);
+            var round = new Round();
+            round.SaveRound(ListOfFrames);
         }
     }
 }
